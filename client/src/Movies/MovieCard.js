@@ -1,21 +1,22 @@
-import React from "react";
+import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-export default function MovieDetails({ movie }) {
-  const { title, director, metascore, stars, id } = movie;
-  console.log("MovieCard movie", movie);
+const MovieCard = props => {
+  console.log(props.movie);
   return (
     <div className="movie-card">
-      <Link to={`/movies/${id}`}>
-        <h2>{title}</h2>
+      <Link to={`/movies/${props.movie.id}`}>
+        <h2>{props.movie.title}</h2>
         <div className="movie-director">
-          Director: <em>{director}</em>
+          Director: <em>{props.movie.director}</em>
         </div>
         <div className="movie-metascore">
-          Metascore: <strong>{metascore}</strong>
+          Metascore: <strong>{props.movie.metascore}</strong>
         </div>
         <h3>Actors</h3>
 
-        {stars.map(star => (
+        {props.movie.stars.map(star => (
           <div key={star} className="movie-star">
             {star}
           </div>
@@ -23,4 +24,6 @@ export default function MovieDetails({ movie }) {
       </Link>
     </div>
   );
-}
+};
+
+export default MovieCard;
